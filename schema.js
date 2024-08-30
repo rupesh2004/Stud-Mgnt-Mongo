@@ -11,6 +11,23 @@ export const connection = () => {
     });
 };
 
+const contactSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+
+  },
+  message : {
+    type: String,
+    required: true
+  }
+})
 const userSchema = new mongoose.Schema({
   id: {
     type: Number,
@@ -45,4 +62,5 @@ const userSchema = new mongoose.Schema({
   },
 });
 const studData = mongoose.model("studentData", userSchema);
-export { studData };
+const contactData = mongoose.model("contactData",contactSchema);
+export { studData, contactData };

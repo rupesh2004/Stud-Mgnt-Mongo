@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { connection, studData } from './schema.js';
+import { connection, studData, contactData } from './schema.js';
 
 const app = express();
 const port = 3000;
@@ -16,12 +16,86 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Route to serve the HTML file with student data
 app.get('/', async (req, res) => {
     try {
-        const students = await studData.find();
-        console.log(students)
-        res.render('index', { students });
+        const totalStudents = await studData.countDocuments();
+        const maleStudents = await studData.countDocuments({gender : "Male"})
+        const feMaleStudents = await studData.countDocuments({gender : "Female"})
+
+        res.render('index',{totalStudents, maleStudents, feMaleStudents});
     } catch (err) {
         console.log("Error fetching student data:", err.message);
         res.status(500).send("Error fetching student data");
+    }
+});
+
+app.get('/students',async (req,res) => {
+    try {
+        const students = await studData.find();
+        console.log(students)
+        res.render('students', { students }); 
+    } catch (err) {
+        console.error("Error retrieving students:", err);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.post('/submitContact',async (req,res) => {
+    const {name, email, message} = req.body;
+    const insertData  = new contactData({
+        name: name,
+        email: email,
+        message: message
+    })
+
+    insertData.save()
+    .then(()=>{
+        res.send(`
+            <script>
+                alert("Message Sent Successfully!");
+                window.location.href = "/contact";
+            </script>
+        `);
+    })
+    .catch(()=>{
+        res.send(`
+            <script>
+                alert("Failed to send message!");
+                window.location.href = "/contact";
+            </script>
+        `);
+    })
+});
+
+
+app.get('/viewStudents',async (req,res) => {
+    try {
+        const students = await studData.find();
+        console.log(students)
+        res.render('viewStudents', { students }); 
+    } catch (err) {
+        console.error("Error retrieving students:", err);
+        res.status(500).send('Server Error');
+    }
+});
+
+app.get('/contact',(req,res)=>{
+    res.render('contact')
+})
+
+
+
+app.get('/view/:id', async (req, res) => {
+    try {
+        const studentId = req.params.id;
+        const student = await studData.findById(studentId);
+
+        if (!student) {
+            return res.status(404).send('Student not found');
+        }
+
+        res.render('viewStud', { student: student }); // Renders the viewStudent.ejs page
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
     }
 });
 
@@ -43,7 +117,7 @@ app.post('/submit', (req, res) => {
             res.send(`
                 <script>
                     alert("Data submitted successfully!");
-                    window.location.href = "/";
+                    window.location.href = "/students";
                 </script>
             `);
         })
@@ -51,7 +125,7 @@ app.post('/submit', (req, res) => {
             res.send(`
                 <script>
                     alert("Error submitting data!");
-                    window.location.href = "/";
+                    window.location.href = "/students";
                 </script>
             `);
         });
@@ -89,7 +163,7 @@ app.post('/update/:id', async (req, res) => {
         res.send(`
             <script>
                 alert("Data updated successfully!");
-                window.location.href = "/";
+                window.location.href = "/viewStudents";
             </script>
         `);
     } catch (err) {
@@ -106,7 +180,7 @@ app.post('/delete/:id', async (req, res) => {
         res.send(`
             <script>
                 alert("Data deleted successfully!");
-                window.location.href = "/";
+                window.location.href = "/viewStudents";
             </script>
         `);
     } catch (err) {

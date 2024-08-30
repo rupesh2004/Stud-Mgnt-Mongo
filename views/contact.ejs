@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact - Student Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .navbar {
+      background-color: #343a40;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ffdf00 !important;
+      transition: color 0.3s ease;
+    }
+
+
+
+    .nav-link {
+      font-size: 1.1rem;
+      color: #ffffff !important;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+      color: #ffdf00 !important;
+    }
+
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #ffdf00;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+
+    .nav-link i {
+      margin-right: 8px;
+      color: #ffdf00;
+    }
+
+    .nav-link:hover i {
+      color: #ffffff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin-top: 50px;
+    }
+
+    .card {
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background: #ffffff;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header {
+      background-color: #343a40;
+      color: white;
+      font-size: 1.5rem;
+      text-align: center;
+      padding: 15px;
+      border-radius: 12px 12px 0 0;
+      animation: slideIn 0.8s ease-out;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body p {
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .card-body p strong {
+      color: #007bff;
+    }
+
+    .btn-primary {
+      width: 200px; /* Adjust the width as needed */
+      border-radius: 50px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      transition: transform 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #0069d9;
+      transform: scale(1.05);
+    }
+
+    .btn-primary:focus {
+      box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.5);
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    i {
+      color: #ffdf00;
+    }
+
+    .icon {
+      color: #007bff;
+      margin-right: 10px;
+    }
+
+    .contact-heading {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      animation: bounceIn 1s ease;
+    }
+
+    .text-center-custom {
+      text-align: center;
+    }
+
+    .footer {
+      background-color: #343a40;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+      padding-left: 2.5rem;
+      
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      border-color: #007bff;
+    }
+
+    .form-control::placeholder {
+      color: #6c757d;
+    }
+
+    .form-label {
+      position: relative;
+      padding-left: 2.5rem; /* Ensure padding is enough to accommodate the icon */
+    }
+
+    .form-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c757d;
+    }
+
+    .color-primary {
+      color: #007bff; /* Primary color */
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px; /* Adjust as needed */
+    }
+
+    .map-card {
+      height: 250px; /* Set a specific height for the map */
+    }
+
+    .map-card iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .contact-info {
+  margin-top: -240px; /* Reduced top margin */
+}
+
+    /* Media Query for Layout Adjustment */
+    @media (max-width: 768px) {
+      .contact-info, .map-card {
+        margin-bottom: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><i style="color: white;" class="fas fa-user-graduate"></i> Student Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/students"><i class="fas fa-user-graduate"></i> Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contact Section -->
+  <section class="container my-5">
+    <h2 class="text-center contact-heading">Contact Us</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card map-card">
+          <div class="card-header">
+            <h5>Our Location</h5>
+          </div>
+          <div class="card-body">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15032.413842493318!2d74.55885049999999!3d16.830587600000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2b3b3a85b1ff7%3A0x32b3c8ed2a7b5d7d!2sMiraj%2C%20Sangli%20District%2C%20Maharashtra%20415110!5e0!3m2!1sen!2sin!4v1631842448378!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5>Send Us a Message</h5>
+          </div>
+          <div class="card-body">
+            <form method="post" action="/submitContact">
+              <div class="mb-3 position-relative">
+                <label for="name" class="form-label"><i class="fas fa-user form-icon color-primary"></i>Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+              </div>
+              <div class="mb-3 position-relative">
+                <label for="email" class="form-label"><i class="fas fa-envelope form-icon color-primary"></i>Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+              </div>
+              <div class="mb-3 position-relative">
+                <label for="message" class="form-label"><i class="fas fa-comment form-icon color-primary"></i>Message</label>
+                <textarea class="form-control" id="message" rows="4" name="message" placeholder="Your Message" required></textarea>
+              </div>
+              <div class="button-container">
+                <button type="submit" name="submitContact" class="btn btn-primary">
+                  <i class="fas fa-paper-plane"></i> Send
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card contact-info">
+          <div class="card-header">
+            <h5>Contact Information</h5>
+          </div>
+          <div class="card-body">
+            <p><i class="fas fa-phone icon"></i>+91 8080186885</p>
+            <p><i class="fas fa-envelope icon"></i>bhosalerupesh67@gmail.com</p>
+            <p><i class="fas fa-map-marker-alt icon"></i>Near post office, Payappachiwaid, Miraj, Sangli : 415 410</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Student Management. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,107 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Information</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ffdf00 !important;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+      color: #ffffff !important;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .nav-link:hover {
+      color: #ffdf00 !important;
+    }
+
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #ffdf00;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
+
+    .nav-link i {
+      margin-right: 8px;
+      color: #ffdf00;
+    }
+
+    .nav-link:hover i {
+      color: #ffffff;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background-image: url('https://source.unsplash.com/1600x900/?education,students');
+      background-size: cover;
+      background-position: center;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      animation: fadeInDown 1.5s ease-in-out;
+    }
+
+    .hero-section p {
+      font-size: 1.25rem;
+      margin-top: 20px;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .hero-section .btn-light {
+      margin-top: 20px;
+      font-weight: bold;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Features Section */
+    .features-section {
+      background-color: #ffffff;
+      padding: 60px 0;
+    }
+
+    .features-section h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+
+    .feature-box {
+      text-align: center;
+      padding: 30px;
+      transition: transform 0.3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-10px);
+    }
+
+    .feature-box i {
+      font-size: 3rem;
+      color: #ffdf00;
+      margin-bottom: 20px;
+    }
+
+    .feature-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-box p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Student Statistics Section */
+    .stats-section {
+      background-color: #f8f9fa;
+      padding: 40px 0;
+    }
+
+    .stats-section h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      font-weight: bold;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background-color: #fff;
+      transition: transform 0.3s;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-10px);
+    }
+
+    .stat-box i {
+      font-size: 3rem;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+
+    .stat-box h3 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .stat-box p {
+      font-size: 1.25rem;
+      color: #555;
+    }
+
+    /* Footer Styling */
+    footer {
+      background-color: #222;
+      color: #aaa;
+    }
+
+    footer p {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <h1 class="text-center bg-secondary text-light">Student Information</h1>
-        <div class="row align-items-start">
-            <div class="col-4">
-                <form method="post" action="/submit">
-                    <div class="mb-3">
-                        <label for="idInput" class="form-label text-dark">ID</label>
-                        <input type="number" class="form-control" id="idInput" placeholder="ID" name="id" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nameInput" class="form-label text-dark">Name</label>
-                        <input type="text" class="form-control" id="nameInput" placeholder="Name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="mobileInput" class="form-label text-dark">Mobile</label>
-                        <input type="number" class="form-control" id="mobileInput" placeholder="Mobile" name="mobile" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="addressTextarea" class="form-label">Address</label>
-                        <textarea class="form-control" id="addressTextarea" rows="3" placeholder="Enter Address" name="address" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cityDropdown" class="form-label">City</label>
-                        <select class="form-select" id="cityDropdown" name="city" required>
-                            <option value="Miraj">Miraj</option>
-                            <option value="Kolhapur">Kolhapur</option>
-                            <option value="Sangli">Sangli</option>
-                        </select>
-                    </div>
-
-                    <label for="hobbies" class="form-label">Hobbies</label><br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Reading" id="hobbyReading" name="hobbie[]">
-                        <label class="form-check-label" for="hobbyReading">Reading</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Playing Tabala" id="hobbyTabala" name="hobbie[]">
-                        <label class="form-check-label" for="hobbyTabala">Playing Tabala</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Swimming" id="hobbySwimming" name="hobbie[]">
-                        <label class="form-check-label" for="hobbySwimming">Swimming</label>
-                    </div>
-
-                    <label for="gender" class="form-label">Gender</label><br>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="genderMale" value="Male" required>
-                        <label class="form-check-label" for="genderMale">Male</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="Female" required>
-                        <label class="form-check-label" for="genderFemale">Female</label>
-                    </div>
-
-                    <input type="submit" class="btn btn-primary mt-3" name="submit" value="Add Student">
-                </form>
-            </div>
-            <div class="col">
-                <table class="table table-bordered border-dark">
-                    <thead>
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Mobile</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">City</th>
-                            <th scope="col">Hobbies</th>
-                            <th scope="col">Gender</th>
-                            <th scope="col">Operations</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% students.forEach(function(student) { %>
-                            <tr>
-                                <td><%= student.id %></td>
-                                <td><%= student.name %></td>
-                                <td><%= student.mobile %></td>
-                                <td><%= student.address %></td>
-                                <td><%= student.city %></td>
-                                <td><%= student.hobbie.join(', ') %></td>
-                                <td><%= student.gender %></td>
-                                <td>
-                                    <a href="/update/<%= student._id %>" class="btn btn-warning btn-sm">Update</a>
-                                    <form method="post" action="/delete/<%= student._id %>" style="display:inline;">
-                                        <br>
-                                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <% }); %>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+      <a class="navbar-brand" href="/"><i class="fas fa-user-graduate" style="color: white;"></i> Student Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/students"><i class="fas fa-user-graduate"></i> Students</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section bg-primary text-white text-center py-5">
+    <div class="container">
+      <h1>Manage Students Seamlessly</h1>
+      <p class="lead">A modern approach to student management</p>
+      <a href="/students" class="btn btn-light">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Student Statistics Section -->
+  <section class="stats-section">
+    <div class="container">
+      <h2>Student Statistics</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="stat-box">
+            <i class="fas fa-users"></i>
+            <h3 id="totalStudents"><%= totalStudents %></h3>
+            <p>Total Students</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-box">
+            <i class="fas fa-female"></i>
+            <h3 id="femaleStudents"><%= feMaleStudents  %></h3>
+            <p>Female Students</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="stat-box">
+            <i class="fas fa-male"></i>
+            <h3 id="maleStudents"><%= maleStudents %></h3>
+            <p>Male Students</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2>Key Features</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="fas fa-user-shield" style="color: #007bff;"></i>
+            <h3>Secure Profiles</h3>
+            <p>Ensure that all student data is kept secure with our top-notch security protocols.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="fas fa-id-badge" style="color: #007bff;"></i>
+            <h3>View Profile</h3>
+            <p>Access and view detailed student profiles, including academic performance and personal information.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="fas fa-user-edit" style="color: #007bff;"></i>
+            <h3>Student Manipulation</h3>
+            <p>Edit and update student information easily, ensuring that records are always accurate.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="fas fa-user-plus" style="color: #007bff;"></i>
+            <h3>Add Student Records</h3>
+            <p>Add new student records quickly with a user-friendly interface that simplifies data entry.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="feature-box">
+            <i class="fas fa-chart-line" style="color: #007bff;"></i>
+            <h3>Insightful Analytics</h3>
+            <p>Generate comprehensive reports to make data-driven decisions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-white text-center py-4">
+    <p>&copy; 2024 StudentManager. All Rights Reserved.</p>
+    <div>
+      <a href="https://www.linkedin.com/in/rupeshkumar-bhosale-681b63255/" target="_blank" class="text-white me-3"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/rupesh2004" target="_blank" class="text-white me-3"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/_rupesh_bhosale_/" target="_blank" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
