@@ -55,7 +55,9 @@ app.post('/submitContact',async (req,res) => {
             </script>
         `);
     })
-    .catch(()=>{
+    .catch((err)=>{
+        console.log(err.message)
+
         res.send(`
             <script>
                 alert("Failed to send message!");
@@ -64,18 +66,46 @@ app.post('/submitContact',async (req,res) => {
         `);
     })
 });
-
-
-app.get('/viewStudents',async (req,res) => {
+app.get('/adminLogin',async (req,res) => {
     try {
-        const students = await studData.find();
-        console.log(students)
-        res.render('viewStudents', { students }); 
+        res.render('adminLogin'); 
     } catch (err) {
         console.error("Error retrieving students:", err);
         res.status(500).send('Server Error');
     }
 });
+
+app.get('/viewStudents', async (req, res) => {
+    try {
+        const students = await studData.find(); // Fetch all students from the database
+        res.render('viewStudents', { students }); // Render the viewStudents.ejs with the students data
+    } catch (err) {
+        console.error("Error retrieving students:", err);
+        res.status(500).send('Server Error');
+    }
+});
+
+// Route to handle admin login and render the viewStudents page after login
+app.post('/viewStudents', async (req, res) => {
+    const { username, password } = req.body;
+    if (username === "rupesh" && password === "rupesh@123") {
+        try {
+            const students = await studData.find();
+            res.render('viewStudents', { students });
+        } catch (err) {
+            console.error("Error retrieving students:", err);
+            res.status(500).send('Server Error');
+        }
+    } else {
+        res.send(`
+            <script>
+                alert("Invalid Credentials");
+                window.location.href = "/adminLogin";
+            </script>
+        `);
+    }
+});
+
 
 app.get('/contact',(req,res)=>{
     res.render('contact')

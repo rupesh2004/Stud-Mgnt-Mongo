@@ -12,18 +12,11 @@
       background-color: #f0f2f5;
     }
 
-    .navbar {
-      background-color: #343a40;
-    }
-
     .navbar-brand {
       font-weight: bold;
       font-size: 1.5rem;
       color: #ffdf00 !important;
-      transition: color 0.3s ease;
     }
-
-
 
     .nav-link {
       font-size: 1.1rem;
@@ -54,6 +47,33 @@
 
     .nav-link:hover i {
       color: #ffffff;
+    }
+
+    /* Dropdown on Hover with Animation */
+    .nav-item.dropdown:hover .dropdown-menu {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .nav-item.dropdown:hover .nav-link {
+      color: #ffdf00 !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dropdown Item Hover */
+    .dropdown-item:hover {
+      background-color: black;
+      color: #ffdf00;
     }
 
     .container {
@@ -254,20 +274,59 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/"><i style="color: white;" class="fas fa-user-graduate"></i> Student Management</a>
+      <a class="navbar-brand" href="/"><i class="fas fa-user-graduate" style="color: white;"></i> Student Management</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/students"><i class="fas fa-user-graduate"></i> Students</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="studentsDropdown" role="button">
+              <i class="fas fa-user-graduate"></i> Students
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="studentsDropdown">
+              <li>
+                <a class="dropdown-item" href="/students" style="color: black; position: relative;">
+                  <i class="fas fa-user-plus" style="color: black;"></i> Add Student
+                </a>
+                <style>
+                  a.dropdown-item:hover {
+                    color: #ffdf00 !important;
+                    background-color: black!important;
+                  }
+                  a.dropdown-item:hover i {
+                    color: #ffdf00 !important;
+                  }
+
+                  
+                </style>
+                
+              </li>
+              <li>
+                <a class="dropdown-item" href="/adminLogin" style="color: black; position: relative;">
+                  <i class="fas fa-users" style="color: black;"></i> View Students
+                </a>
+                <style>
+                  a.dropdown-item:hover {
+                    color: #ffdf00 !important;
+                    background-color: black!important;
+                  }
+                  a.dropdown-item:hover i {
+                    color: #ffdf00 !important;
+                  }
+
+                  
+                </style>
+                
+              </li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
-
   <!-- Contact Section -->
   <section class="container my-5">
     <h2 class="text-center contact-heading">Contact Us</h2>
@@ -292,15 +351,15 @@
             <form method="post" action="/submitContact">
               <div class="mb-3 position-relative">
                 <label for="name" class="form-label"><i class="fas fa-user form-icon color-primary"></i>Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required autocomplete="off">
               </div>
               <div class="mb-3 position-relative">
                 <label for="email" class="form-label"><i class="fas fa-envelope form-icon color-primary"></i>Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required autocomplete="off">
               </div>
               <div class="mb-3 position-relative">
                 <label for="message" class="form-label"><i class="fas fa-comment form-icon color-primary"></i>Message</label>
-                <textarea class="form-control" id="message" rows="4" name="message" placeholder="Your Message" required></textarea>
+                <textarea class="form-control" id="message" rows="4" name="message" placeholder="Your Message" required autocomplete="off"></textarea>
               </div>
               <div class="button-container">
                 <button type="submit" name="submitContact" class="btn btn-primary">

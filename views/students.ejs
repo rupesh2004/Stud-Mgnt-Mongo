@@ -49,6 +49,34 @@
       color: #ffffff;
     }
 
+    /* Dropdown on Hover with Animation */
+    .nav-item.dropdown:hover .dropdown-menu {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .nav-item.dropdown:hover .nav-link {
+      color: #ffdf00 !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dropdown Item Hover */
+    .dropdown-item:hover {
+      background-color: black;
+      color: #ffdf00;
+    }
+
+
     .form-label {
       font-weight: bold;
       color: #333;
@@ -153,13 +181,21 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/students"><i class="fas fa-user-graduate"></i> Students</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="studentsDropdown" role="button">
+                <i class="fas fa-user-graduate"></i> Students
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="studentsDropdown">
+                <li><a class="dropdown-item" href="/students"><i class="fas fa-user-plus"></i> Add Student</a></li>
+                <li><a class="dropdown-item" href="/adminLogin"><i class="fas fa-users"></i> View Students</a></li>
+              </ul>
+            </li>
             <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
           </ul>
         </div>
       </div>
     </nav>
-
+  
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-md-8">
@@ -170,31 +206,31 @@
               <label for="idInput" class="form-label">
                 <i class="fas fa-id-badge"></i> ID
               </label>
-              <input type="number" class="form-control" id="idInput" placeholder="ID" name="id" required />
+              <input type="number" class="form-control" id="idInput" placeholder="ID" name="id" autocomplete="off" required />
             </div>
             <div class="mb-3">
               <label for="nameInput" class="form-label">
                 <i class="fas fa-user"></i> Name
               </label>
-              <input type="text" class="form-control" id="nameInput" placeholder="Name" name="name" required />
+              <input type="text" class="form-control" id="nameInput" placeholder="Name"autocomplete="off" name="name" required />
             </div>
             <div class="mb-3">
               <label for="mobileInput" class="form-label">
                 <i class="fas fa-phone"></i> Mobile
               </label>
-              <input type="number" class="form-control" id="mobileInput" placeholder="Mobile" name="mobile" required />
+              <input type="number" class="form-control" id="mobileInput"autocomplete="off" placeholder="Mobile" name="mobile" required />
             </div>
             <div class="mb-3">
               <label for="addressTextarea" class="form-label">
                 <i class="fas fa-home"></i> Address
               </label>
-              <textarea class="form-control" id="addressTextarea" rows="3" placeholder="Enter Address" name="address" required></textarea>
+              <textarea class="form-control" id="addressTextarea" rows="3"autocomplete="off" placeholder="Enter Address" name="address" required></textarea>
             </div>
             <div class="mb-3">
               <label for="cityDropdown" class="form-label">
                 <i class="fas fa-city"></i> City
               </label>
-              <select class="form-select" id="cityDropdown" name="city" required>
+              <select class="form-select" id="cityDropdown" autocomplete="off" name="city" required>
                 <option value="Miraj">Miraj</option>
                 <option value="Kolhapur">Kolhapur</option>
                 <option value="Sangli">Sangli</option>
@@ -204,15 +240,15 @@
               <i class="fas fa-star"></i> Hobbies
             </label><br />
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Reading" id="hobbyReading" name="hobbie[]" />
+              <input class="form-check-input" type="checkbox"autocomplete="off" value="Reading" id="hobbyReading" name="hobbie[]" />
               <label class="form-check-label" for="hobbyReading">Reading</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Playing Tabala" id="hobbyTabala" name="hobbie[]" />
+              <input class="form-check-input" type="checkbox" autocomplete="off" value="Playing Tabala" id="hobbyTabala" name="hobbie[]" />
               <label class="form-check-label" for="hobbyTabala">Playing Tabala</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="Swimming" id="hobbySwimming" name="hobbie[]" />
+              <input class="form-check-input" type="checkbox" autocomplete="off"  value="Swimming" id="hobbySwimming" name="hobbie[]" />
               <label class="form-check-label" for="hobbySwimming">Swimming</label>
             </div>
             <br>
@@ -232,7 +268,7 @@
               <button type="submit" class="btn btn-primary mt-3" name="submit">
                 <i class="fas fa-user-plus"></i> Add Student
               </button>&nbsp;
-              <a href="/viewStudents" class="btn view-students-btn mt-3">
+              <a href="/adminLogin" class="btn view-students-btn mt-3">
                 <i class="fas fa-users"></i> View Students
               </a>
             </div>

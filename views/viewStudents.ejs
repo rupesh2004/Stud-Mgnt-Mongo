@@ -14,47 +14,75 @@
     />
 
     <style>
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #e9ecef; /* Light gray background */
-      }
+       body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f0f2f5;
+    }
 
-      .navbar-brand {
-        font-weight: bold;
-        font-size: 1.5rem;
-        color: #ffdf00 !important;
-      }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #ffdf00 !important;
+    }
 
-      .nav-link {
-        font-size: 1.1rem;
-        color: #ffffff !important;
-        position: relative;
-        transition: color 0.3s ease-in-out;
-      }
+    .nav-link {
+      font-size: 1.1rem;
+      color: #ffffff !important;
+      position: relative;
+      transition: color 0.3s ease-in-out;
+    }
 
-      .nav-link:hover {
-        color: #ffdf00 !important;
-      }
+    .nav-link:hover {
+      color: #ffdf00 !important;
+    }
 
-      .nav-link:hover::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: #ffdf00;
-        left: 0;
-        bottom: -5px;
-        transition: width 0.3s;
-      }
+    .nav-link:hover::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: #ffdf00;
+      left: 0;
+      bottom: -5px;
+      transition: width 0.3s;
+    }
 
-      .nav-link i {
-        margin-right: 8px;
-        color: #ffdf00;
-      }
+    .nav-link i {
+      margin-right: 8px;
+      color: #ffdf00;
+    }
 
-      .nav-link:hover i {
-        color: #ffffff;
+    .nav-link:hover i {
+      color: #ffffff;
+    }
+
+    /* Dropdown on Hover with Animation */
+    .nav-item.dropdown:hover .dropdown-menu {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .nav-item.dropdown:hover .nav-link {
+      color: #ffdf00 !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dropdown Item Hover */
+    .dropdown-item:hover {
+      background-color: black;
+      color: #ffdf00;
+    }
+
 
       .table-container {
         display: flex;
@@ -180,42 +208,30 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"
-          ><i class="fas fa-user-graduate" style="color: white"></i> Student
-          Management</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/students"
-                ><i class="fas fa-user-graduate"></i> Students</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/contact"
-                ><i class="fas fa-envelope"></i> Contact</a
-              >
-            </li>
-          </ul>
-        </div>
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><i class="fas fa-user-graduate" style="color: white;"></i> Student Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="studentsDropdown" role="button">
+              <i class="fas fa-user-graduate"></i> Students
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="studentsDropdown">
+              <li><a class="dropdown-item" href="/students"><i class="fas fa-user-plus"></i> Add Student</a></li>
+              <li><a class="dropdown-item" href="/adminLogin"><i class="fas fa-users"></i> View Students</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
     <div class="container-fluid text-center">
       <h1>Student Information</h1>

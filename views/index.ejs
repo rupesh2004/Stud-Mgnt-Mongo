@@ -49,6 +49,33 @@
       color: #ffffff;
     }
 
+    /* Dropdown on Hover with Animation */
+    .nav-item.dropdown:hover .dropdown-menu {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .nav-item.dropdown:hover .nav-link {
+      color: #ffdf00 !important;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Dropdown Item Hover */
+    .dropdown-item:hover {
+      background-color: black;
+      color: #ffdf00;
+    }
+
     /* Hero Section */
     .hero-section {
       background-image: url('https://source.unsplash.com/1600x900/?education,students');
@@ -192,7 +219,8 @@
     }
 
     /* Footer Styling */
-    footer {
+    footer
+    {
       background-color: #222;
       color: #aaa;
     }
@@ -213,7 +241,15 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="/students"><i class="fas fa-user-graduate"></i> Students</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="studentsDropdown" role="button">
+              <i class="fas fa-user-graduate"></i> Students
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="studentsDropdown">
+              <li><a class="dropdown-item" href="/students"><i class="fas fa-user-plus"></i> Add Student</a></li>
+              <li><a class="dropdown-item" href="/adminLogin"><i class="fas fa-users"></i> View Students</a></li>
+            </ul>
+          </li>
           <li class="nav-item"><a class="nav-link" href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
         </ul>
       </div>
@@ -244,7 +280,7 @@
         <div class="col-md-4">
           <div class="stat-box">
             <i class="fas fa-female"></i>
-            <h3 id="femaleStudents"><%= feMaleStudents  %></h3>
+            <h3 id="femaleStudents"><%= feMaleStudents %></h3>
             <p>Female Students</p>
           </div>
         </div>
@@ -292,7 +328,6 @@
             <p>Add new student records quickly with a user-friendly interface that simplifies data entry.</p>
           </div>
         </div>
-        
         <div class="col-md-4">
           <div class="feature-box">
             <i class="fas fa-chart-line" style="color: #007bff;"></i>
@@ -315,6 +350,5 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
